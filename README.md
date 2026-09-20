@@ -1,0 +1,4 @@
+CART 351 JOURNAL - KAI MAQUIVAR
+
+--Journal Entry 1--
+
