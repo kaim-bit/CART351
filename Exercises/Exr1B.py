@@ -162,13 +162,13 @@ print("Expected output: alpha, beta, gamma, delta, epsilon, zeta, eta, theta")
 # (Use the .append() method.) (3) Change the value
 # of the variable "glue" so that the desired output is displayed.
 
-greek = ["alpha", "beta", "gamma", "delta", "epsilon","zeta"]
+greek = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
 new_letters = "eta theta"
-new_letters_list = ["eta", "theta"] # <-- replace this
+new_letters_list = new_letters.split()
 
 for letter_name in new_letters_list:
-	pass # <-- and replace this
+    greek.append(letter_name)
 
-glue = "?" # <-- and replace this
+glue = " "
 
 print(glue.join(greek))
