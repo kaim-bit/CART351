@@ -67,9 +67,20 @@ h3 {
 }
 
 img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
     place-items: center;
+    border: 10px solid black;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
+p {
+    padding: 10px;
+    padding-bottom: 10px;
+}
 
 /*
 SPECIAL TEXT CLASSES
