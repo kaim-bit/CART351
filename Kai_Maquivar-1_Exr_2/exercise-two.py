@@ -30,9 +30,9 @@ def getSearchCriteria():
 
 #*************************************************
 # #Task-2: GET REQUEST
-# @app.route("/t2")
-# def t2():
-#     return render_template("t2.html")
+@app.route("/t2")
+def t2():
+    return render_template("t2.html")
 #*************************************************
 @app.route("/getSearchCriteria_adv")
 def getSearchCriteria_adv():
