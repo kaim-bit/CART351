@@ -22,14 +22,14 @@ def getSearchCriteria():
         "https://images-api.nasa.gov/search",
         params={"q": search_term, "media_type": "image"}
     )
-    items = response.json()["collection"]["items"]
+    nasaImages = response.json()["collection"]["items"]
 
-    if items:
-        first_item = items[0]
-        description = first_item["data"][0].get(
+    if nasaImages:
+        first_image = nasaImages[0]
+        description = first_image["data"][0].get(
             "description"
         )
-        img_path = first_item["links"][0]["href"]
+        img_path = first_image["links"][0]["href"]
         return render_template(
             "t1.html",
             have_results=True,
