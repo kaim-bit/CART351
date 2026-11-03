@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 app = Flask(__name__)
 
@@ -13,32 +13,59 @@ def index():
 #Task-1: GET REQUEST
 @app.route("/t1")
 def t1():
-    return render_template("t1.html",have_results=False)
+    return render_template("t1.html", have_results=False)
 #*************************************************
 @app.route("/getSearchCriteria")
 def getSearchCriteria():
-    #fill me in :
-    #replace the empty space to be url encoded
-    # imgFromNasa = imgFromNasa.replace(' ', '%20')
-    # return render_template("t1.html",
-    #                           have_results = True,
-    #                           description=description,
-    #                           imgPath = imgFromNasa
-                                           
-    #                        )
+    search_term = request.args.get("Input", "").strip()
+    response = requests.get(
+        "https://images-api.nasa.gov/search",
+        params={"q": search_term, "media_type": "image"}
+    )
+    items = response.json()["collection"]["items"]
+
+    if items:
+        first_item = items[0]
+        description = first_item["data"][0].get(
+            "description"
+        )
+        img_path = first_item["links"][0]["href"]
+        return render_template(
+            "t1.html",
+            have_results=True,
+            description=description,
+            imgPath=img_path
+        )
     pass
 
 #*************************************************
 # #Task-2: GET REQUEST
 @app.route("/t2")
 def t2():
-    return render_template("t2.html")
+    return render_template("t2.html", images=[])
 #*************************************************
 @app.route("/getSearchCriteria_adv")
 def getSearchCriteria_adv():
- #fill me in :
-#  return render_template("t2.html",images=encodedImageLinks)
-    pass
+    search_term = request.args.get("Input", "").strip()
+
+    response = requests.get(
+        "https://images-api.nasa.gov/search",
+        params={"q": search_term, "media_type": "image"}
+    )
+    data = response.json()
+    nasaImages= data["collection"]["items"]
+    encodedImageLinks = []
+
+    for item in nasaImages:
+        singleImage = item["links"][0]["href"]
+        singleImage = singleImage.replace(" ", "%20")
+        encodedImageLinks.append(singleImage)
+
+    return render_template(
+        "t2.html",
+        images=encodedImageLinks,
+        search_term=search_term
+    )
 #*************************************************
 
 #run

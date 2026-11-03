@@ -2,10 +2,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<link rel="stylesheet" href="../static/css/T2.css">
-<h3>** Welcome **</h3>
-<section>
-    <!-- stuff goes in here -->
-    <p> This is the content for the index page</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/T2.css') }}">
+<section class="t2-page">
+    <form action="{{ url_for('getSearchCriteria_adv') }}" method="get">
+        <label class="titleThing" for="Input">Search NASA images</label>
+        <input type="search" id="Input" name="Input" value="{{ search_term or '' }}" placeholder="type something"
+            required> <!-- i had to look this up aswell-->
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="imageplaceholders" class="image-grid">
+        {% for image in images %}
+        <img src="{{ image }}" alt="nasa images">
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

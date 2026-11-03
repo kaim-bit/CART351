@@ -3,9 +3,17 @@
 
 {% block content %}
 <link rel="stylesheet" href="../static/css/T1.css">
-<h3>** Welcome **</h3>
+<h3>** Enchante **</h3>
 <section>
-    <!-- stuff goes in here -->
-    <p> This is the content for the index page</p>
+    <form action="{{ url_for('getSearchCriteria') }}" method="get">
+        <label for="Input">Search NASA images:</label>
+        <input type="text" id="Input" name="Input" value="{{ search_term or '' }}" placeholder="Enter your search">
+        <!-- i had to look this up-->
+        <button type="submit">Search</button>
+    </form>
+    <section id="results" aria-live="polite">
+        <p>{{ description }}</p>
+        <img src="{{ imgPath }}" alt="{{ description }}">
+    </section>
 </section>
 {% endblock %}

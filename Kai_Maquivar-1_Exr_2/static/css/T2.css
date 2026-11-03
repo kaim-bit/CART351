@@ -12,13 +12,13 @@ h2 {
 
     font-size: 32px;
     padding: 5px;
-    background-color: rgb(25, 27, 28);
+    background-color: rgb(99, 175, 213);
     color: rgb(255, 255, 255);
 }
 
 nav {
     padding-bottom: 5px;
-    background-color: rgb(219, 23, 23);
+    background-color: rgb(155, 166, 188);
 }
 
 nav ul {
@@ -32,8 +32,16 @@ nav ul li {
     text-transform: uppercase;
     text-decoration: none;
     list-style-type: none;
+}
 
+p {
+    padding: 40px;
+    padding-bottom: 100px;
+    text-align: center;
+}
 
+img {
+    align-self: center;
 }
 
 nav li a {
@@ -53,4 +61,20 @@ footer {
     padding: 5px;
     color: rgb(6, 6, 6);
 
+}
+
+#imageplaceholders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+
+}
+
+#imageplaceholders img {
+    display: block;
+    width: 900px;
+    height: 900px;
+    object-fit: cover;
+    margin: 0 auto;
 }
