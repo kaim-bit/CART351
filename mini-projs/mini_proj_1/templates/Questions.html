@@ -1,0 +1,13 @@
+<!-- will be a child of base-->
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="../static/css/Questions.css">
+<section>
+    <h1>Friendly Questions!!!</h1>
+    <section id="results" aria-live="polite">
+        <p>{{ description }}</p>
+        <img src="{{ imgPath }}" alt="{{ description }}">
+    </section>
+</section>
+{% endblock %}

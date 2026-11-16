@@ -1,0 +1,10 @@
+<!-- will be a child of base-->
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="start-page">
+    <h1>Start The Questionaire!</h1>
+    <a class="button" href="{{ url_for('QuestionOne') }}">Start!</a>
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="game-page">
+    <h1>TAKE IT BACK</h1>
+    <div id="game-canvas"></div>
+    <p id="game-status" aria-live="polite">Survive for more than 60 seconds to take back your data.</p>
+    <form id="game-results-form" action="{{ url_for('game_results') }}" method="POST" hidden>
+        <input type="hidden" id="time-alive" name="time_alive">
+    </form>
+</section>
+<!-- gets the images for the game and also the fetch stuff, url thing basically does the endpoint stuff while survey re recieves the save responce, one sends the data to be saved and the other retrieves it-->
+<script>
+
+    window.smileEnemyGifUrl = {{ url_for('question_gif', filename = 'fifth.gif') | tojson }};
+    window.surveyAnswers = {{ answers | tojson }};
+    window.surveyUrlThing = {{ url_for('save_survey_response') | tojson }};
+    window.surveyRetrieveThing = {{ url_for('receive_survey_count') | tojson }};
+</script>
+
+<!-- i had no clue how to do this, but its just getting the library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

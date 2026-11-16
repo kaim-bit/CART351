@@ -1,0 +1,18 @@
+<!-- will be a child of base-->
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/QuestionFour.css') }}">
+<section>
+    <img class="question-gif" src="{{ url_for('question_gif', filename='truesecond.gif') }}" alt="Animated illustration">
+    <h1>Where do you usually eat?</h1>
+    <br>
+    <br>
+    <br>
+    <form method="POST">
+        <label for="answer">Your answer:</label>
+        <input type="text" id="answer" name="answer" value="{{ answer }}" maxlength="200" required>
+        <button type="submit">Next Question!</button>
+    </form>
+</section>
+{% endblock %}
