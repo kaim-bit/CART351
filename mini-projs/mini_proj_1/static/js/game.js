@@ -7,7 +7,7 @@ let smileEnemyImages = [];
 let timeAlive = 0;
 let start = 0;
 let ended = false;
-let saveRequest;
+let responseRequest;
 
 function setup() {
     const gameBox = document.getElementById("game-canvas");
@@ -43,8 +43,7 @@ function setup() {
     }
 
     start = millis();
-    saveRequest = fetchSData();
-    fetchSurveyCount();
+    responseRequest = saveSurveyAnswers();
 }
 
 
@@ -143,49 +142,28 @@ function checkCollisions() {
 }
 
 async function finishGame() {
-    try {
-        await saveRequest;
-    } catch (error) {
-        console.error("Could not save survey answers:", error);
-    }
+    await responseRequest;
 
     const form = document.getElementById("game-results-form");
     document.getElementById("time-alive").value = timeAlive;
     form.submit();
 }
 
-
-async function fetchSData() {
-    // Checks that all answers exist, then sends them to Flask to be saved.
-    const hasAnswers = Object.values(window.surveyAnswers).every(
-        (answer) => answer.trim().length > 0
-    );
-
-    if (hasAnswers) {
-        const response = await fetch(window.surveyUrlThing, {
+async function saveSurveyAnswers() {
+    try {
+        const saveResponse = await fetch(window.surveySaveUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-
             body: JSON.stringify({ answers: window.surveyAnswers })
         });
-        if (!response.ok) {
-            throw new Error(`Saving survey answers failed (${response.status}).`);
-        }
-    }
-}
 
-async function fetchSurveyCount() {
-    try {
-        const response = await fetch(window.surveyRetrieveThing);
-        if (!response.ok) {
-            throw new Error(`Retrieving survey count failed (${response.status}).`);
+        if (!saveResponse.ok) {
+            throw new Error(`Saving answers failed (${saveResponse.status}).`);
         }
-        await response.json();
     } catch (error) {
-        console.error("Could not retrieve survey count:", error);
+        console.error("Could not save the questionnaire answers:", error);
     }
 }
-
 
 function drawPlayer() {
     noStroke();

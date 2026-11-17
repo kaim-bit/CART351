@@ -9,13 +9,10 @@
         <input type="hidden" id="time-alive" name="time_alive">
     </form>
 </section>
-<!-- gets the images for the game and also the fetch stuff, url thing basically does the endpoint stuff while survey re recieves the save responce, one sends the data to be saved and the other retrieves it-->
 <script>
-
     window.smileEnemyGifUrl = {{ url_for('question_gif', filename = 'fifth.gif') | tojson }};
     window.surveyAnswers = {{ answers | tojson }};
-    window.surveyUrlThing = {{ url_for('save_survey_response') | tojson }};
-    window.surveyRetrieveThing = {{ url_for('receive_survey_count') | tojson }};
+    window.surveySaveUrl = {{ url_for('survey_save_thing') | tojson }};
 </script>
 
 <!-- i had no clue how to do this, but its just getting the library -->

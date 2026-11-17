@@ -4,10 +4,41 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
 <section class="game-results">
     {% if results.won %}
-    <h1>YOU SURVIVED</h1>
+    <h1>WON</h1>
     <p>Lucky... {{ results.time_alive }} seconds. Your answers were deleted.</p>
     {% else %}
-    <p>It's all mine. {{ results.time_alive }} seconds. Your answers remain saved.</p>
+    <p>It's all mine. {{ results.time_alive }} seconds. your secrets will be with me.</p>
+    <pre id="answer-list"></pre>
+    <script>
+        const savedAnswersUrl = {{ url_for('recieve_surv') | tojson }};
+        //quite obv but just shows the answers saved at the end
+        async function showSavedAnswers() {
+            try {
+                const response = await fetch(savedAnswersUrl);
+                const savedData = await response.json();
+                const answers = savedData.answers;
+
+
+                const answerText =
+                    `Question 1: ${answers["Question 1"]}\n` +
+                    `Question 2: ${answers["Question 2"]}\n` +
+                    `Question 3: ${answers["Question 3"]}\n` +
+                    `Question 4: ${answers["Question 4"]}\n` +
+                    `Question 5: ${answers["Question 5"]}\n` +
+                    `Question 6: ${answers["Question 6"]}\n` +
+                    `Question 7: ${answers["Question 7"]}\n` +
+                    `Question 8: ${answers["Question 8"]}\n` +
+                    `Question 9: ${answers["Question 9"]}\n` +
+                    `Question 10: ${answers["Question 10"]}`;
+
+                document.getElementById("answer-list").textContent = answerText;
+            } catch (error) {
+                print("error here again")
+            }
+        }
+
+        showSavedAnswers();
+    </script>
     {% endif %}
 </section>
 {% endblock %}

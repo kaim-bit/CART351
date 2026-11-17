@@ -94,10 +94,27 @@ main {
     color: rgb(245, 240, 240);
 }
 
+.game-results h2 {
+    margin: 0;
+    color: rgb(245, 240, 240);
+}
+
 .game-results p {
     max-width: 32rem;
     margin: 0;
     color: rgb(220, 214, 218);
     font-size: 40px;
     line-height: 1.5;
+}
+
+.game-results #answer-status {
+    font-size: 1rem;
+}
+
+.game-results #answer-list {
+    max-width: 32rem;
+    margin: 0;
+    color: rgb(220, 214, 218);
+    text-align: left;
+    white-space: pre-wrap;
 }
